@@ -10,12 +10,15 @@ services:
     working_dir: /app
     depends_on:
       - mongodb
+    links:
+      - mongodb
   mongodb:
     image: mongo
     volumes:
       - ./mongodb:/data/db
-    ports:
-      - 27017:27017
+    # Enable ports for outside access
+    # ports:
+    #   - 27017:27017
     environment:
       - MONGO_INITDB_ROOT_USERNAME=root
       - MONGO_INITDB_ROOT_PASSWORD=root
