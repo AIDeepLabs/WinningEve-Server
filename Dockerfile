@@ -9,4 +9,4 @@ RUN apt install -y libgl1
 EXPOSE 8888
 EXPOSE 8080
 WORKDIR /app
-CMD python3 -m jupyter notebook --ip 0.0.0.0 --allow-root
+CMD python3 server.py
