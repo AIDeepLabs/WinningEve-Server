@@ -6,7 +6,7 @@ COPY requirements.txt requirements.txt
 RUN pip3 install -r requirements.txt
 RUN apt update
 RUN apt install -y libgl1
-EXPOSE 8888
-EXPOSE 8080
+# EXPOSE 8888
+EXPOSE 9000
 WORKDIR /app
 CMD python3 server.py
