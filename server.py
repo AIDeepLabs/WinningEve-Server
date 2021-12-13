@@ -348,7 +348,7 @@ def detectObjectsInVideo():
     # Return the prediction
     return jsonify({"status":"success","prediction":prediction})
     
-app.run(host='0.0.0.0', port=8080)
+app.run(host='0.0.0.0', port=9000)
 
 # %%
 # !pip install -U flask-cors
