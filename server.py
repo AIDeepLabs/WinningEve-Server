@@ -148,6 +148,8 @@ app.config.update(
     RANDOM_BYTES= 32,
     MAX_VIDEO_LENGTH= 60*3,
     PER_FRAME= 0.5,
+    FREE_IP_LIMIT={'images':10000,'videos':10},
+    MEMBER_LIMIT={'images':10000,'videos':10}
 )
 
 
@@ -161,8 +163,8 @@ def detectObjectsInImage():
         return jsonify({"status":"failure","error":"No image found in request"})
     
     serverSettings=db.settings.find_one()
-    ipFreeQuota=serverSettings['ip-free']
-    memberQuota=serverSettings['member']
+    ipFreeQuota=app.config['FREE_IP_LIMIT']
+    memberQuota=app.config['MEMBER_LIMIT']
     
     # Check if user is valid and has credit
     user=None
@@ -250,8 +252,8 @@ def deleteUser():
 @app.route('/getQuota',methods=["POST"])
 def getQuota():
     serverSettings=db.settings.find_one()
-    ipFreeQuota=serverSettings['ip-free']
-    memberQuota=serverSettings['member']
+    ipFreeQuota=app.config['FREE_IP_LIMIT']
+    memberQuota=app.config['MEMBER_LIMIT']
     if 'apiKey' in request.headers:
         user=is_api_valid(request.headers['apiKey'],db)
         if user!=None: 
@@ -270,8 +272,8 @@ def getQuota():
 @app.route('/detectObjectsInVideo',methods=["POST"])
 def detectObjectsInVideo():
     serverSettings=db.settings.find_one()
-    ipFreeQuota=serverSettings['ip-free']
-    memberQuota=serverSettings['member']
+    ipFreeQuota=app.config['FREE_IP_LIMIT']
+    memberQuota=app.config['MEMBER_LIMIT']
     if not 'video' in request.files:
         return jsonify({"status":"failure","error":"No video found in request"})
 
