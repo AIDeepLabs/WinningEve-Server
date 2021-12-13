@@ -180,7 +180,7 @@ def detectObjectsInImage():
     # Check ip quota
     else:
         
-        request_ip=request.remote_addr
+        request_ip=request.headers['X-Forwarded-For']
         
         ip=db.ips.find_one({"ip":request_ip})
         if ip!=None:
@@ -259,7 +259,7 @@ def getQuota():
         else:
             return jsonify({"status":"failure","error":"Invalid API key"})
     else:
-        request_ip=request.remote_addr
+        request_ip=request.headers['X-Forwarded-For']
         ip=db.ips.find_one({"ip":request_ip})
         if ip!=None:
             return jsonify({"status":"success","image-quota":ipFreeQuota["images"]-ip['imagesProcessed'],"video-quota":ipFreeQuota["videos"]-ip['videosProcessed']})
@@ -293,7 +293,7 @@ def detectObjectsInVideo():
     # Check ip quota
     else:
         
-        request_ip=request.remote_addr
+        request_ip=request.headers['X-Forwarded-For']
         
         ip=db.ips.find_one({"ip":request_ip})
 
