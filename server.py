@@ -141,7 +141,7 @@ import hashlib
 import matplotlib.pyplot as plt
 from flask_cors import CORS, cross_origin
 app = Flask(__name__)
-CORS(app)
+#CORS(app)
 app.config.update(
     BUFFER= 262144,
     TMP_DIR= '/tmp',
