@@ -8,6 +8,7 @@ from collections import defaultdict
 import bcrypt,datetime
 import secrets
 import os
+from flask_cors import CORS, cross_origin
 
 # %%
 model = torch.hub.load('pytorch/vision:v0.10.0', 'resnet152', pretrained=True)
@@ -141,7 +142,7 @@ import hashlib
 import matplotlib.pyplot as plt
 from flask_cors import CORS, cross_origin
 app = Flask(__name__)
-#CORS(app)
+CORS(app)
 app.config.update(
     BUFFER= 262144,
     TMP_DIR= '/tmp',
